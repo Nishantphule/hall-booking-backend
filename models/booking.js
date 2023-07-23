@@ -3,21 +3,26 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 // create a schema
 const bookingSchema = new mongoose.Schema({
-    customerName: {
-        type: String,
-        required: true,
+    customerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Customer',
+        required:true
+    },
+    dateOfBooking: {
+        type: Date,
+        default: Date.now
     },
     date: {
         type: String,
-        required: true
+        required: true,
     },
     startTime: {
         type: String,
-        required: true
+        required: true,
     },
     endTime: {
         type: String,
-        required: true
+        required: true,
     },
     roomId: {
         type: mongoose.Schema.Types.ObjectId,

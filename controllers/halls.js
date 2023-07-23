@@ -3,15 +3,16 @@ const hallsRouter = require('express').Router();
 
 // import the model
 const Hall = require('../models/hall');
-const Booking = require('../models/booking');
 
 // endpoint to get all the Halls
+// get rooms with booked Data
 hallsRouter.get('/', async (request, response) => {
-    await Hall.find({}, {}).populate("bookings",{customerName:1 ,date:1, startTime:1})
+    await Hall.find({}, {}).populate("bookings",{customerName:1 ,date:1, startTime:1, endTime:1})
         .then((halls) => {
             response.json(halls);
         });
 });
+
 
 // fetches a single resource
 hallsRouter.get('/:id', (request, response, next) => {
@@ -46,7 +47,7 @@ hallsRouter.delete('/:id', (request, response) => {
                 return response.status(404).json({ error: 'Hall not found' });
             }
             else {
-                return response.status(204).json({ message: 'Hall deleted successfully' });
+                return response.status(201).json({ message: 'Hall deleted successfully' });
             }
         })
         .catch((error) => {

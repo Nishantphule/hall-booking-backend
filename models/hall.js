@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 // create a schema
 const hallSchema = new mongoose.Schema({
+    name:{
+      type:String,
+      required:true,
+      unique:true  
+    },
     noOfSeats: {
         type: Number,
         required: true,
@@ -21,6 +27,8 @@ const hallSchema = new mongoose.Schema({
         }
     ]
 });
+
+hallSchema.plugin(uniqueValidator);
 
 hallSchema.set('toJSON', {
     transform: (document, returnedObject) => {

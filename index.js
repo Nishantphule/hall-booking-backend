@@ -30,7 +30,8 @@ mongoose.connect(config.MONGO_URL)
 
 // set the endpoints
 const hallsRouter = require('./controllers/halls');   
-const bookingsRouter = require('./controllers/bookings');   
+const bookingsRouter = require('./controllers/bookings');  
+const customersRouter = require('./controllers/customers');    
     
 // root end point: prints Welcome sms as an HTML
 app.get('/', (request, response) => {
@@ -39,6 +40,8 @@ app.get('/', (request, response) => {
 
 app.use("/api/halls",hallsRouter);
 app.use("/api/bookings",bookingsRouter);
+app.use("/api/customers",customersRouter);
+
 
 // middle ware
 app.use(middleware.unknownEndpoint)
