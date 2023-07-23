@@ -6,7 +6,7 @@ const Customer = require('../models/customer');
 
 // endpoint to get all the customers
 customersRouter.get('/', async (request, response) => {
-    await Customer.find({}, {}).populate("bookings.bookingId", { dateOfBooking: 1, startTime: 1, endTime: 1 })
+    await Customer.find({}, {}).populate("bookings.bookingId", { date: 1, startTime: 1, endTime: 1 })
         .then((customers) => {
             response.json(customers);
         });
@@ -16,7 +16,7 @@ customersRouter.get('/', async (request, response) => {
 // get customer with booking details
 customersRouter.get('/:id', (request, response, next) => {
     const id = request.params.id;
-    Customer.findById(id).populate("bookings.bookingId", { dateOfBooking: 1, startTime: 1, endTime: 1 })
+    Customer.findById(id).populate("bookings.bookingId", { date: 1, startTime: 1, endTime: 1 })
         .then((customer) => {
             if (!customer) {
                 return response.status(404).json({ error: 'Customer not found' });
