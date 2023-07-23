@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 
 // create a schema
 const bookingSchema = new mongoose.Schema({
@@ -12,7 +11,7 @@ const bookingSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    date: {
+    dateBooked: {
         type: String,
         required: true,
     },
@@ -30,7 +29,6 @@ const bookingSchema = new mongoose.Schema({
     }
 });
 
-bookingSchema.plugin(uniqueValidator);
 
 bookingSchema.set('toJSON', {
     transform: (document, returnedObject) => {

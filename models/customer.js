@@ -10,8 +10,10 @@ const customerSchema = new mongoose.Schema({
     },
     bookings: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Booking',
+            bookingId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Booking'
+            },
             roomId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Hall'
