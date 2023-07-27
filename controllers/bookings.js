@@ -18,7 +18,7 @@ bookingsRouter.get('/', async (request, response) => {
 // fetches a single resource
 bookingsRouter.get('/:id', (request, response, next) => {
     const id = request.params.id;
-    Booking.findById(id)
+    Booking.findById(id).populate("roomId", { name: 1, noOfSeats: 1, aminities: 1, price: 1 }).populate("customerId", { customerName: 1 })
         .then((booking) => {
             if (!booking) {
                 return response.status(404).json({ error: 'Booking not found' });

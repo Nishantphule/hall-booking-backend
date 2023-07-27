@@ -26,22 +26,21 @@ mongoose.connect(config.MONGO_URL)
     .catch((error) => {
         console.log('Error connecting to MongoDB:', error.message);
     })
-    
+
 
 // set the endpoints
-const hallsRouter = require('./controllers/halls');   
-const bookingsRouter = require('./controllers/bookings');  
-const customersRouter = require('./controllers/customers');    
-    
+const hallsRouter = require('./controllers/halls');
+const bookingsRouter = require('./controllers/bookings');
+const customersRouter = require('./controllers/customers');
+
 // root end point: prints Welcome sms as an HTML
 app.get('/', (request, response) => {
     response.send('<h1>Welcome to Hall Booking App!</h1>');
 });
 
-app.use("/api/halls",hallsRouter);
-app.use("/api/bookings",bookingsRouter);
-app.use("/api/customers",customersRouter);
-
+app.use("/api/halls", hallsRouter);
+app.use("/api/bookings", bookingsRouter);
+app.use("/api/customers", customersRouter);
 
 // middle ware
 app.use(middleware.unknownEndpoint)

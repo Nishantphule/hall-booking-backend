@@ -5,7 +5,7 @@ const bookingSchema = new mongoose.Schema({
     customerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Customer',
-        required:true
+        required: true
     },
     dateOfBooking: {
         type: Date,
@@ -32,7 +32,7 @@ const bookingSchema = new mongoose.Schema({
 
 bookingSchema.set('toJSON', {
     transform: (document, returnedObject) => {
-        returnedObject.bookingId = returnedObject._id.toString();
+        returnedObject.bookingId = returnedObject._id;
         delete returnedObject._id;
         delete returnedObject.__v;
     }

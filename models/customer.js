@@ -26,7 +26,7 @@ customerSchema.plugin(uniqueValidator);
 
 customerSchema.set('toJSON', {
     transform: (document, returnedObject) => {
-        returnedObject.customerId = returnedObject._id.toString();
+        returnedObject.customerId = returnedObject._id;
         delete returnedObject._id;
         delete returnedObject.__v;
     }

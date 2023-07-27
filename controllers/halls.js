@@ -7,7 +7,7 @@ const Hall = require('../models/hall');
 // endpoint to get all the Halls
 // get rooms with booked Data
 hallsRouter.get('/', async (request, response) => {
-    await Hall.find({}, {}).populate("bookings",{name:1 ,date:1, startTime:1, endTime:1})
+    await Hall.find({}, {}).populate("bookings", { name: 1, date: 1, startTime: 1, endTime: 1 })
         .then((halls) => {
             response.json(halls);
         });
@@ -30,11 +30,15 @@ hallsRouter.get('/:id', (request, response, next) => {
 // creates a new resource based on the request data
 hallsRouter.post('/', async (request, response, next) => {
 
-    const hall = new Hall(request.body);
+    try {
+        const hall = new Hall(request.body);
 
-    const savedHall = await hall.save();
+        const savedHall = await hall.save();
 
-    response.status(201).json({ message: 'Hall created successfully', Hall: savedHall });
+        response.status(201).json({ message: 'Hall created successfully', Hall: savedHall });
+    } catch (error) {
+        response.status(505).json({ message: error })
+    }
 });
 
 
