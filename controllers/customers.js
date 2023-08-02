@@ -6,7 +6,7 @@ const Customer = require('../models/customer');
 
 // endpoint to get all the customers
 customersRouter.get('/', async (request, response) => {
-    await Customer.find({}, {}).populate("bookings.bookingId", { date: 1, startTime: 1, endTime: 1 }).populate("bookings.roomId", { name: 1 })
+    await Customer.find({}, {}).populate("bookings.booking", { bookedDate: 1, startTime: 1, endTime: 1 }).populate("bookings.hall", { name: 1 })
         .then((customers) => {
             response.json(customers);
         })
@@ -17,7 +17,7 @@ customersRouter.get('/', async (request, response) => {
 // get customer with booking details
 customersRouter.get('/:id', (request, response, next) => {
     const id = request.params.id;
-    Customer.findById(id).populate("bookings.bookingId", { date: 1, startTime: 1, endTime: 1 }).populate("bookings.roomId", { name: 1 })
+    Customer.findById(id).populate("bookings.booking", { bookedDate: 1, startTime: 1, endTime: 1 }).populate("bookings.hall", { name: 1 })
         .then((customer) => {
             if (!customer) {
                 return response.status(404).json({ error: 'Customer not found' });
@@ -31,7 +31,7 @@ customersRouter.get('/:id', (request, response, next) => {
         .catch(error => next(error));
 });
 
-// creates a new resource based on the request data
+// creates a new customer on the request data
 customersRouter.post('/', async (request, response, next) => {
     try {
         const customer = new Customer(request.body);

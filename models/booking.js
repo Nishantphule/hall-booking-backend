@@ -2,16 +2,15 @@ const mongoose = require('mongoose');
 
 // create a schema
 const bookingSchema = new mongoose.Schema({
-    customerId: {
+    customer: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Customer',
-        required: true
+        ref: 'Customer'
     },
     dateOfBooking: {
         type: Date,
         default: Date.now
     },
-    date: {
+    bookedDate: {
         type: String,
         required: true,
     },
@@ -23,7 +22,7 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    roomId: {
+    hall: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Hall'
     }

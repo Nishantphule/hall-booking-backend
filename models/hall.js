@@ -32,7 +32,7 @@ hallSchema.plugin(uniqueValidator);
 
 hallSchema.set('toJSON', {
     transform: (document, returnedObject) => {
-        returnedObject.roomId = returnedObject._id;
+        returnedObject.hallId = returnedObject._id;
         delete returnedObject._id;
         delete returnedObject.__v;
     }
