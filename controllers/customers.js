@@ -26,7 +26,7 @@ customersRouter.get('/:id', (request, response, next) => {
             }
             response.json({
                 customerName: customer.customerName,
-                count: customer.bookings.length,
+                TotalBookings: customer.bookings.length,
                 Bookings: customer.bookings
             });
         })
