@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// create a schema
+// create a schema for booking
 const bookingSchema = new mongoose.Schema({
     customer: {
         type: mongoose.Schema.Types.ObjectId,

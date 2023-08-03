@@ -14,7 +14,7 @@ hallsRouter.get('/', async (request, response) => {
 });
 
 
-// fetches a single resource
+// fetches a single resource using id
 hallsRouter.get('/:id', (request, response, next) => {
     const id = request.params.id;
     Hall.findById(id).populate("bookings", { bookedDate: 1, startTime: 1, endTime: 1 })
@@ -26,6 +26,7 @@ hallsRouter.get('/:id', (request, response, next) => {
         })
         .catch(error => next(error));
 });
+
 
 // creates a new room on the request data
 hallsRouter.post('/', async (request, response, next) => {

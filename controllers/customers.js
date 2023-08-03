@@ -5,6 +5,7 @@ const customersRouter = require('express').Router();
 const Customer = require('../models/customer');
 
 // endpoint to get all the customers
+// List all customers with booked data
 customersRouter.get('/', async (request, response) => {
     await Customer.find({}, {}).populate("bookings.booking", { bookedDate: 1, startTime: 1, endTime: 1 }).populate("bookings.hall", { name: 1 })
         .then((customers) => {
@@ -14,7 +15,8 @@ customersRouter.get('/', async (request, response) => {
 });
 
 // fetches a single resource
-// get customer with booking details
+// get customer with all his booking details using id 
+// And listing how many times a customer has booked a room
 customersRouter.get('/:id', (request, response, next) => {
     const id = request.params.id;
     Customer.findById(id).populate("bookings.booking", { bookedDate: 1, startTime: 1, endTime: 1 }).populate("bookings.hall", { name: 1 })
